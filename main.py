@@ -63,11 +63,44 @@ def returnbooks():
     print("Book ID not Found")
 # TODO: Create a function to list all overdue books
 # A book is overdue if its due_date is before today AND it is still checked out
-
+def overduebooks():
+    print("Overdue books:")
+    today = datetime.today()
+    found = False
+    for x in library_books:
+        if not x["available"] and x["due_date"]:
+            duedate = datetime.strptime(x["due_date"], "%Y-%m-%d")
+            if duedate < today:
+                print(f"{x["title"]} was due on {duedate}")
+                found = True    
+    if not found:
+        print("No overdue books.")
 
 # -------- Level 5 --------
 # TODO: Convert your data into a Book class with methods like checkout() and return_book()
 # TODO: Add a simple menu that allows the user to choose different options like view, search, checkout, return, etc.
+print("Welcome to the Library!!!")
+print("How can I help you today?")
+print("1. View Books")
+print("2. Search Books")
+print("3. Checkout Book")
+print("4. Return Book")
+print("5. View OverDue Books")
+print("6. Exit")
+choice = int(input("Which option do you choose? "))
+if choice == 1:
+    viewbooks()
+elif choice == 2:
+    searchbooks()
+elif choice == 3:
+    checkout()
+elif choice == 4:
+    returnbooks()
+elif choice == 5:
+    overduebooks()
+else:
+    print("Thank you for coming to the library!!!")
+
 
 # -------- Optional Advanced Features --------
 # You can implement these to move into Tier 4:
@@ -79,7 +112,5 @@ def returnbooks():
 
 if __name__ == "__main__":
     # You can use this space to test your functions
-    viewbooks()
-    returnbooks()
     pass
 
